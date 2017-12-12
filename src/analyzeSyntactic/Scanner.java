@@ -9,11 +9,33 @@ public class Scanner {
 	private StringBuffer 	currentSpelling;
 	
 	public Scanner(char currentChar, int currentType, StringBuffer currentSpelling) {
+		setCurrentChar(currentChar);
+		setCurrentType(currentType);
+		setCurrentSpelling(currentSpelling);
+	}
+	
+	public char getCurrentChar() {
+		return currentChar;
+	}
+
+	public void setCurrentChar(char currentChar) {
 		this.currentChar = currentChar;
+	}
+
+	public int getCurrentType() {
+		return currentType;
+	}
+
+	public void setCurrentType(int currentType) {
 		this.currentType = currentType;
+	}
+
+	public StringBuffer getCurrentSpelling() {
+		return currentSpelling;
+	}
+
+	public void setCurrentSpelling(StringBuffer currentSpelling) {
 		this.currentSpelling = currentSpelling;
-		
-		// está errado, estou com pregruiça de colocar todos set's e get's
 	}
 	
 	private void take (char expectedChar) {
@@ -56,5 +78,5 @@ public class Scanner {
 		currentType = scanToken(); 
 					
 			return new Token(currentType, currentSpelling.toString(), 0, 0);
-	}
+	}	
 }
