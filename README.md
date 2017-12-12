@@ -1,2 +1,8 @@
 # Mini Pascal Compiler
-Copilador mini-pascal, projeto desenvolvido na disciplina de Compiladores, turma 2017.2 
+
+
+Mini-Pascal Compiler, a project developed in Compilers discipline,
+
+Semester 2017.2.
+Course in Computer Engineering,
+Federal University of the São Francisco Valley
