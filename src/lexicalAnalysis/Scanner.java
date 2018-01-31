@@ -1,19 +1,39 @@
-package analyzeSyntactic;
-
-import analyzeLexical.Token;
+package lexicalAnalysis;
 
 public class Scanner {
 	
 	private char 			currentChar;
 	private int 			currentType;
 	private StringBuffer 	currentSpelling;
+	private StringBuffer	text;
+	int						currentLine,currentColumn;
 	
-	public Scanner(char currentChar, int currentType, StringBuffer currentSpelling) {
-		setCurrentChar(currentChar);
-		setCurrentType(currentType);
-		setCurrentSpelling(currentSpelling);
+	
+	public Scanner(StringBuffer text,int currentLine,int currentColumn){
+	
+		this.text = text;
+		setCurrentLine(currentLine);
+		setCurrentColumn(currentColumn);
+		setCurrentChar(this.text.charAt(0));
+		
+		
 	}
-	
+	public void setCurrentLine(int currentLine) 
+	{
+		this.currentLine = currentLine;
+	}
+	public void setCurrentColumn(int currentColumn) 
+	{
+		this.currentColumn = currentColumn;
+	}
+	public int getCurrentLine() 
+	{
+		return this.currentLine;
+	}
+	public int getCurrentColumn() 
+	{
+		return this.currentColumn;
+	}	
 	public char getCurrentChar() {
 		return currentChar;
 	}
