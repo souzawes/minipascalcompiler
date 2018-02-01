@@ -12,7 +12,7 @@ public class MpC
 		{
 			
 			System.out.println("To compile type java MpC and the directory of the code file");
-			System.out.println("If there's spaces in folders names it's mandatory to put the directory between quotation marks");
+			System.out.println("If there's spaces in the folder's names it's mandatory to put the directory between quotation marks");
 			
 		}
 		else
@@ -22,18 +22,17 @@ public class MpC
 			
 			if(!text.isEmpty())
 			{
-				System.out.println("The file readed follows:");
+				System.out.println("The file read follows:");
 				System.out.println(text);
-				StringBuffer str = new StringBuffer(text);
 				int l,c,pos=0;
 				l=c=0;
 				//Implementar aqui um la�o que remova caracteres separadores!
-				Scanner scan = new Scanner(str,l,c);//acho que tem que chamar aqui o analisador sint�tico antes e receber a AST pra jogar no analisador de contexto
+				Scanner scan = new Scanner(reader,l,c);//acho que tem que chamar aqui o analisador sint�tico antes e receber a AST pra jogar no analisador de contexto
 				
 			}
 			else
 			{
-				System.out.println("The file readed was empty");
+				System.out.println("The file read was empty.");
 			}
 		}
 		

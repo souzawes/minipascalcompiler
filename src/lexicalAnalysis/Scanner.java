@@ -1,23 +1,23 @@
 package lexicalAnalysis;
+import fileReader.TextFileReader;
 
 public class Scanner {
 	
 	private char 			currentChar;
 	private int 			currentType;
 	private StringBuffer 	currentSpelling;
-	private StringBuffer	text;
+	private TextFileReader 	fileText;
 	int						currentLine,currentColumn;
 	
 	
-	public Scanner(StringBuffer text,int currentLine,int currentColumn){
+	public Scanner(TextFileReader fileText,int currentLine,int currentColumn){
 	
-		this.text = text;
+		this.fileText = fileText;
 		setCurrentLine(currentLine);
 		setCurrentColumn(currentColumn);
-		setCurrentChar(this.text.charAt(0));
-		
-		
+		setCurrentChar('a');
 	}
+	
 	public void setCurrentLine(int currentLine) 
 	{
 		this.currentLine = currentLine;
@@ -58,30 +58,50 @@ public class Scanner {
 		this.currentSpelling = currentSpelling;
 	}
 	
-	private void take (char expectedChar) {
+	private void take(char expectedChar) {
 		if(currentChar == expectedChar) {
 			currentSpelling.append(currentChar);
 			//currentChar = proximo caracter;
 		}
+		//setCurrentChar()
 	}
 	
-	private void takeIt () {
+	private void take() { 	//	takeIt()
 		currentSpelling.append(currentChar);
 		//currentChar = proximo caracter
 	}
 	
-	private boolean isDigit () {
-		//retorna verdadeiro se é digito, e falso se não
-		return true;
+	private boolean isDigit (char c) {	//	Verifica se Ã© um digito
+		if ((c >= '0' && c <'9'))
+			return true;
+		else
+			return false;
 	}
 	
-	private boolean isLetter () {
-		// retorna verdadeiro se é letra, falso se não
-		return true;
+	private boolean isLetter (char c) {
+		if ((c >= 'a' && c <'z') || (c >= 'A' && c <'Z'))
+			return true;
+		else
+			return false;
+	}
+	private boolean isGraphic (char c) { 	//	Verifica se Ã© qualquer caracter grÃ¡fico
+		if (c < ' ')
+			return false;
+		else
+			return true;
 	}
 	
-	private void scanSeparator () {
-		
+	private void scanSeparator () { 	//	Tratamento de comentÃ¡rios
+		switch (currentChar) {
+			case '!':
+				take();
+				while (isGraphic(currentChar))	// Ignorar caracter grÃ¡fico
+					take();
+			break;
+			case ' ': case '\r': case '\n' :
+				take();
+			break;
+		}
 	}
 	
 	private int scanToken () {
@@ -90,13 +110,14 @@ public class Scanner {
 	
 	public Token scan () {
 		while(	currentChar == '!' 
-				|| currentChar == ' ' 
+				|| currentChar == ' '
+				|| currentChar == '\r'
 				|| currentChar == '\n')
 			scanSeparator();
 		
 		currentSpelling = new StringBuffer(" ");
 		currentType = scanToken(); 
 					
-			return new Token(currentType, currentSpelling.toString(), 0, 0);
+		return new Token(currentType, currentSpelling.toString(), 0, 0);
 	}	
 }
