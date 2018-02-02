@@ -24,16 +24,15 @@ public class MpC
 			if(!text.isEmpty())
 			{
 				System.out.println("The file read follows:");
-				System.out.println(text);
+				//System.out.println(text);
 				Parser parser = new Parser(reader);
 				
 			}
 			else
 			{
 				System.out.println("The file read was empty.");
-			}
+			}	
 		}
 		
 	}
-
 }

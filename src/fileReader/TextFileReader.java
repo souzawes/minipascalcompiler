@@ -27,7 +27,7 @@ public class TextFileReader {
 	}
 	public char getNextChar()
 	{
-		char current = (char) 0;
+		char current = (char) -1;
 		try
 		{
 			current = (char) text.read();
@@ -35,6 +35,7 @@ public class TextFileReader {
 		catch (Exception E)
 		{
 			System.out.println("Error on character read from file");
+			
 		}
 		return current;
 	}
