@@ -59,9 +59,11 @@ public class Scanner {
 	}
 	
 	private void take(char expectedChar) {
-		if(currentChar == expectedChar) {
+		if(currentChar == expectedChar) 
+		{
 			currentSpelling.append(currentChar);
 			setCurrentChar(fileText.getNextChar());
+			setCurrentColumn(getCurrentColumn()+1);
 		}
 		else { 	//	Erro de caracter não experado
 			System.out.println("ERROR\n Expected: " + expectedChar 
@@ -73,6 +75,14 @@ public class Scanner {
 	private void take() { 	//	takeIt()
 		currentSpelling.append(currentChar);
 		setCurrentChar(fileText.getNextChar());
+		
+		if(getCurrentChar()=='\n' ||getCurrentChar()=='\r' )//quebra de linha
+		{
+			setCurrentLine(getCurrentLine()+1);
+			setCurrentColumn(0);
+		}
+		else
+			setCurrentColumn(getCurrentColumn()+1);
 	}
 	
 	private boolean isDigit (char c) {	//	Verifica se é um digito
