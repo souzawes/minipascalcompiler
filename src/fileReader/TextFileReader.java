@@ -9,7 +9,6 @@ public class TextFileReader {
 	public TextFileReader(String path)
 	{
 		System.out.println("The path readed is -->"+path);
-		
 		try  {
 			text = new BufferedReader(new FileReader(path));	
 		}
@@ -54,8 +53,9 @@ public class TextFileReader {
 			{
 				System.out.println("Error on line read from file");
 			}
-			str = str+aux;
-		}while(!aux.isEmpty());
+			if (aux != null)
+				str = str+aux+"\n";
+		}while(aux != null);
 		
 		try
 		{
@@ -63,7 +63,7 @@ public class TextFileReader {
 		}
 		catch(Exception E)
 		{
-			System.out.println("Error at reseting file stream position");
+			System.out.println("Error while reseting file stream position.");
 		}
 		
 		return str;

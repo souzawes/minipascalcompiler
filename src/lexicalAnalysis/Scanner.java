@@ -61,14 +61,18 @@ public class Scanner {
 	private void take(char expectedChar) {
 		if(currentChar == expectedChar) {
 			currentSpelling.append(currentChar);
-			//currentChar = proximo caracter;
+			setCurrentChar(fileText.getNextChar());
 		}
-		//setCurrentChar()
+		else { 	//	Erro de caracter não experado
+			System.out.println("ERROR\n Expected: " + expectedChar 
+					+ " in line " + getCurrentLine() + 
+					" column "+ getCurrentColumn());
+		}
 	}
 	
 	private void take() { 	//	takeIt()
 		currentSpelling.append(currentChar);
-		//currentChar = proximo caracter
+		setCurrentChar(fileText.getNextChar());
 	}
 	
 	private boolean isDigit (char c) {	//	Verifica se é um digito
