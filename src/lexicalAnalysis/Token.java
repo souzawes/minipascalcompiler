@@ -3,13 +3,13 @@ package lexicalAnalysis;
 public class Token{
 	
 	private int 	type;
-	private String	value;
+	private String	spelling;
 	private int		currentLine,
 					currentColumn;
 	
-	public Token(int type, String value, int currentLine, int currentColumn){
+	public Token(int type, String spelling, int currentLine, int currentColumn){
 		setType(type);
-		setValue(value);
+		setSpelling(spelling);
 		setCurrentLine(currentLine);
 		setCurrentColumn(currentColumn);
 	}
@@ -18,8 +18,8 @@ public class Token{
 		this.type	= newType;
 	}
 	
-	private void setValue(String newValue){
-		this.value	= newValue;
+	private void setSpelling(String newValue){
+		this.spelling	= newValue;
 	}
 	
 	private void setCurrentLine(int newCurrentLine){
@@ -34,8 +34,8 @@ public class Token{
 		return this.type;
 	}
 	
-	public String getValue() {
-		return this.value;
+	public String getSpelling() {
+		return this.spelling;
 	}
 	
 	public int getCurrentLine() {
@@ -44,6 +44,10 @@ public class Token{
 	
 	public int getCurrentColumn() {
 		return this.currentColumn;
+	}
+	public String toString()
+	{
+		return new String("Type = "+getType()+"\nSpelling = "+getSpelling()+"\nCurrent Line = "+getCurrentLine()+"\nCurrent Column = "+getCurrentColumn());
 	}
 	
 	public final static int

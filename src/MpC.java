@@ -1,6 +1,7 @@
 import fileReader.TextFileReader;
 import lexicalAnalysis.Scanner;
 import lexicalAnalysis.Token;
+import syntaxAnalysis.Parser;
 public class MpC 
 {
 
@@ -24,10 +25,7 @@ public class MpC
 			{
 				System.out.println("The file read follows:");
 				System.out.println(text);
-				int l,c,pos=0;
-				l=c=0;
-				//Implementar aqui um la�o que remova caracteres separadores!
-				Scanner scan = new Scanner(reader,l,c);//acho que tem que chamar aqui o analisador sint�tico antes e receber a AST pra jogar no analisador de contexto
+				Parser parser = new Parser(reader);
 				
 			}
 			else

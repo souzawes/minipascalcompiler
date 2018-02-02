@@ -10,12 +10,12 @@ public class Scanner {
 	int						currentLine,currentColumn;
 	
 	
-	public Scanner(TextFileReader fileText,int currentLine,int currentColumn){
+	public Scanner(TextFileReader fileText){
 	
 		this.fileText = fileText;
-		setCurrentLine(currentLine);
-		setCurrentColumn(currentColumn);
-		setCurrentChar('a');
+		setCurrentLine(0);
+		setCurrentColumn(0);
+		setCurrentChar((char)0);
 	}
 	
 	public void setCurrentLine(int currentLine) 
