@@ -1,16 +1,13 @@
 package fileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.FileReader;
+
 
 public class TextFileReader {
 	BufferedReader text;
 	
 	public TextFileReader(String path)
 	{
-		Path directory = Paths.get(path);
 		System.out.println("The path readed is -->"+path);
 		
 		try  {
@@ -19,10 +16,57 @@ public class TextFileReader {
 		catch(Exception error) {
 			System.out.println("Error reading the file.");
 		}
+		
+		try
+		{
+			text.mark(1000000);//marca a posição inicial da stream
+		}
+		catch(Exception E)
+		{
+			System.out.println("Error at setting initial mark");;
+		}
+	}
+	public char getNextChar()
+	{
+		char current = (char) 0;
+		try
+		{
+			current = (char) text.read();
+		}
+		catch (Exception E)
+		{
+			System.out.println("Error on character read from file");
+		}
+		return current;
 	}
 	
-	public String toString() {
-		return  "STRING"; //text.toString();
+	public String toString()
+	{
+		String str = new String();
+		String aux = new String();
+		do
+		{
+			try
+			{
+				aux = text.readLine();
+			}
+			catch(Exception E)
+			{
+				System.out.println("Error on line read from file");
+			}
+			str = str+aux;
+		}while(!aux.isEmpty());
+		
+		try
+		{
+			text.reset();
+		}
+		catch(Exception E)
+		{
+			System.out.println("Error at reseting file stream position");
+		}
+		
+		return str;
 	}
 
 }
