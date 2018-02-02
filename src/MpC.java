@@ -1,7 +1,4 @@
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import fileReader.TextFileReader;
 import lexicalAnalysis.Scanner;
 import lexicalAnalysis.Token;
 public class MpC 
@@ -20,18 +17,8 @@ public class MpC
 		}
 		else
 		{
-			Path directory = Paths.get(args[0]);
-			System.out.println("The path readed is -->"+args[0]);
-			
-			try {
-				byte [] file = Files.readAllBytes(directory);
-				text = new String(file);
-				
-				
-			}catch(Exception error)
-			{
-				System.out.println("Error in the reading of the file");
-			}
+			TextFileReader reader = new TextFileReader(args[0]);
+			text = reader.toString();
 			
 			if(!text.isEmpty())
 			{
@@ -40,8 +27,8 @@ public class MpC
 				StringBuffer str = new StringBuffer(text);
 				int l,c,pos=0;
 				l=c=0;
-				//Implementar aqui um laço que remova caracteres separadores!
-				Scanner scan = new Scanner(str,l,c);//acho que tem que chamar aqui o analisador sintático antes e receber a AST pra jogar no analisador de contexto
+				//Implementar aqui um laï¿½o que remova caracteres separadores!
+				Scanner scan = new Scanner(str,l,c);//acho que tem que chamar aqui o analisador sintï¿½tico antes e receber a AST pra jogar no analisador de contexto
 				
 			}
 			else
