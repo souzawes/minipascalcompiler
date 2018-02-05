@@ -141,7 +141,7 @@ public class Scanner {
 			currentSpelling = new StringBuffer(" ");
 			currentType = scanToken(); 
 						
-			return new Token(currentType, currentSpelling.toString(), getCurrentLine(), getCurrentColumn());
+			return new Token(currentType, currentSpelling.toString(), getCurrentLine(), getCurrentColumn()-currentSpelling.length());
 		}	
 	}		
 }
