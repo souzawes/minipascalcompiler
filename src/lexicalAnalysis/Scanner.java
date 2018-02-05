@@ -59,9 +59,11 @@ public class Scanner {
 	}
 	
 	private void take(char expectedChar) {
-		if(currentChar == expectedChar) {
+		if(currentChar == expectedChar) 
+		{
 			currentSpelling.append(currentChar);
 			setCurrentChar(fileText.getNextChar());
+			setCurrentColumn(getCurrentColumn()+1);
 		}
 		else { 	//	Erro de caracter não experado
 			System.out.println("ERROR\n Expected: " + expectedChar 
@@ -73,6 +75,14 @@ public class Scanner {
 	private void take() { 	//	takeIt()
 		currentSpelling.append(currentChar);
 		setCurrentChar(fileText.getNextChar());
+		
+		if(getCurrentChar()=='\n' ||getCurrentChar()=='\r' )//quebra de linha
+		{
+			setCurrentLine(getCurrentLine()+1);
+			setCurrentColumn(0);
+		}
+		else
+			setCurrentColumn(getCurrentColumn()+1);
 	}
 	
 	private boolean isDigit (char c) {	//	Verifica se é um digito
@@ -94,6 +104,10 @@ public class Scanner {
 		else
 			return true;
 	}
+	private boolean isEOF(char c)
+	{
+		return (c == (char) -1);
+	}
 	
 	private void scanSeparator () { 	//	Tratamento de comentários
 		switch (currentChar) {
@@ -112,16 +126,22 @@ public class Scanner {
 		return 0;
 	}
 	
-	public Token scan () {
-		while(	currentChar == '!' 
-				|| currentChar == ' '
-				|| currentChar == '\r'
-				|| currentChar == '\n')
-			scanSeparator();
-		
-		currentSpelling = new StringBuffer(" ");
-		currentType = scanToken(); 
-					
-		return new Token(currentType, currentSpelling.toString(), 0, 0);
-	}	
+	public Token scan () 
+	{
+		if(isEOF(currentChar))
+			return null;
+		else
+		{
+			while(	currentChar == '!' 
+					|| currentChar == ' '
+					|| currentChar == '\r'
+					|| currentChar == '\n')
+				scanSeparator();
+			
+			currentSpelling = new StringBuffer(" ");
+			currentType = scanToken(); 
+						
+			return new Token(currentType, currentSpelling.toString(), getCurrentLine(), getCurrentColumn()-currentSpelling.length());
+		}	
+	}		
 }
