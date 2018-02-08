@@ -4,14 +4,14 @@ public class Token{
 	
 	private int 	type;
 	private String	spelling;
-	private int		currentLine,
-					currentColumn;
+	private int		line,
+					column;
 	
-	public Token(int type, String spelling, int currentLine, int currentColumn){
+	public Token(int type, String spelling, int line, int column){
 		setType(type);
 		setSpelling(spelling);
-		setCurrentLine(currentLine);
-		setCurrentColumn(currentColumn);
+		setLine(line);
+		setColumn(column);
 	}
 
 	private void setType(int newType){
@@ -22,12 +22,12 @@ public class Token{
 		this.spelling	= newValue;
 	}
 	
-	private void setCurrentLine(int newCurrentLine){
-		this.currentLine	= newCurrentLine; 
+	private void setLine(int newLine){
+		this.line	= newLine; 
 	}
 	
-	private void setCurrentColumn(int newCurrentColumn){
-		this.currentColumn	= newCurrentColumn;
+	private void setColumn(int newColumn){
+		this.column	= newColumn;
 	}
 	
 	public int getType() {
@@ -38,19 +38,19 @@ public class Token{
 		return this.spelling;
 	}
 	
-	public int getCurrentLine() {
-		return this.currentLine;
+	public int getLine() {
+		return this.line;
 	}
 	
-	public int getCurrentColumn() {
-		return this.currentColumn;
+	public int getColumn() {
+		return this.column;
 	}
 	public String toString()
 	{
 		return new String("Type = "+getType()+
 				"\nSpelling = "+getSpelling()+
-				"\nCurrent Line = "+getCurrentLine()+
-				"\nCurrent Column = "+getCurrentColumn()
+				"\nCurrent Line = "+getLine()+
+				"\nCurrent Column = "+getColumn()
 				);
 	}
 	
@@ -90,9 +90,9 @@ public class Token{
 		MULOP			= 32,	// *
 		DIVOP			= 33, 	// /
 		LOTOP			= 34, 	// <
-		HITOP			= 35,	// >
+		GRTOP			= 35,	// >
 		LOEOP			= 36, 	// <=
-		HIEOP			= 37, 	// >=
+		GREOP			= 37, 	// >=
 		EQTOP			= 38, 	// =
 		DIFOP			= 39, 	// <>
 		ATTOP			= 40, 	// :=

@@ -26,6 +26,7 @@ public class MpC
 				System.out.println("The file read follows:");
 				//System.out.println(text);
 				Parser parser = new Parser(reader);
+				parser.parse();
 				
 			}
 			else

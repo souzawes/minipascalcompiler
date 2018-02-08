@@ -14,8 +14,12 @@ public class Parser {
 	}
 	public void parse()
 	{
-		while(!currentToken.getSpelling().equals("<eot>"))
+		for (int c = 0; c < 40 ; c++)
 		{
+			currentToken = scanner.scan();
+			System.out.println(currentToken.toString());
+			currentToken = scanner.scan();
+			System.out.println(currentToken.toString());
 			currentToken = scanner.scan();
 			System.out.println(currentToken.toString());
 		}

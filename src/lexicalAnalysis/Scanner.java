@@ -8,13 +8,12 @@ public class Scanner {
 	private StringBuffer 	currentSpelling;
 	private TextFileReader 	fileText;
 	int						currentLine,currentColumn;
-	
-	
+		
 	public Scanner(TextFileReader fileText){
 		this.fileText = fileText;
 		setCurrentLine(0);
 		setCurrentColumn(0);
-		setCurrentChar((char)0);
+		setCurrentChar(fileText.getNextChar());
 	}
 	
 	public void setCurrentLine(int currentLine) 
@@ -111,7 +110,7 @@ public class Scanner {
 		return (c == (char) -1);
 	}
 	
-	private void scanSeparator () { 	//	Tratamento de comentários
+	private void scanSeparator () { 	//	Tratamento de comentários e separadores múltiplos
 		switch (getCurrentChar()) {
 			case '!':
 				take();
@@ -125,14 +124,14 @@ public class Scanner {
 	}
 	
 	private int scanToken () {
-		if (isLetter(getCurrentChar())) {
-			take();
+		if (isLetter(getCurrentChar())) { 	//	Identifica o conjunto de simbolos de caracter
+			take();							//	{a,b,...,z,A,B,...,Z}
 			while(isLetter(getCurrentChar()) || isDigit(getCurrentChar()))
 				take();
 			return Token.ID;
 		}
-		else if (isDigit(getCurrentChar())){
-			take();
+		else if (isDigit(getCurrentChar())){	//	Identifica o conjunto de digitos
+			take();								//	{0,1,...,9}
 			while(isDigit(getCurrentChar()))
 					take();
 			if (getCurrentChar() == '.' && getLookahead() != '.') {
@@ -148,7 +147,7 @@ public class Scanner {
 			if (getLookahead() == '.'){
 				take();
 				take();
-				return Token.TILL;
+				return Token.TILL;	
 			} 
 			else if (isDigit(getLookahead())){
 				do { 
@@ -160,10 +159,83 @@ public class Scanner {
 			else {
 				take();
 				return Token.DOT;
-			}
-				
+			}				
 		}
-		return -1;
+		else if (getCurrentChar() == '[') {
+			take();
+			return Token.LBRACKET;
+		}
+		else if (getCurrentChar() == ']') {
+			take();
+			return Token.RBRACKET;
+		}
+		else if (getCurrentChar() == '(') {
+			take();
+			return Token.LPARENTHESIS;
+		}
+		else if (getCurrentChar() == ')') {
+			take();
+			return Token.RPARENTHESIS;
+		}
+		else if (getCurrentChar() == ',') {
+			take();
+			return Token.COMMA;
+		}
+		else if (getCurrentChar() == ':') {
+			take();
+			if (getLookahead() == '=') {
+				take();
+				return Token.ATTOP;
+			}
+			return Token.COLON;
+		}
+		else if (getCurrentChar() == ';') {
+			take();
+			return Token.SEMICOLON;
+		}
+		else if (getCurrentChar() == '+') {
+			take();
+			return Token.SUMOP;
+		}
+		else if (getCurrentChar() == '-') {
+			take();
+			return Token.SUBOP;
+		}
+		else if (getCurrentChar() == '*') {
+			take();
+			return Token.MULOP;
+		}
+		else if (getCurrentChar() == '/') {
+			take();
+			return Token.DIVOP;
+		}
+		else if (getCurrentChar() == '<') {
+			take();
+			if (getLookahead() == '=') {
+				take();
+				return Token.LOEOP;
+			}
+			else if (getLookahead() == '>') {
+				take();
+				return Token.DIFOP;
+			}
+			else 
+				return Token.MULOP;
+		}
+		else if (getCurrentChar() == '>') {
+			take();
+			if (getLookahead() == '=') {
+				take();
+				return Token.GREOP;
+			}
+			else 
+				return Token.GRTOP;
+		}
+		else if (getCurrentChar() == '=') {
+			take();
+			return Token.EQTOP;
+		}
+		return -1; 	//	Tem que ser reportado erro léxico
 	}
 	
 	public Token scan () 
