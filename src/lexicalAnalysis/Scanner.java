@@ -183,7 +183,7 @@ public class Scanner {
 		}
 		else if (getCurrentChar() == ':') {
 			take();
-			if (getLookahead() == '=') {
+			if (getCurrentChar() == '=') {
 				take();
 				return Token.ATTOP;
 			}
@@ -211,11 +211,11 @@ public class Scanner {
 		}
 		else if (getCurrentChar() == '<') {
 			take();
-			if (getLookahead() == '=') {
+			if (getCurrentChar() == '=') {
 				take();
 				return Token.LOEOP;
 			}
-			else if (getLookahead() == '>') {
+			else if (getCurrentChar() == '>') {
 				take();
 				return Token.DIFOP;
 			}
@@ -224,7 +224,7 @@ public class Scanner {
 		}
 		else if (getCurrentChar() == '>') {
 			take();
-			if (getLookahead() == '=') {
+			if (getCurrentChar() == '=') {
 				take();
 				return Token.GREOP;
 			}
