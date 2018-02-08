@@ -47,61 +47,105 @@ public class Token{
 	}
 	public String toString()
 	{
-		return new String("Type = "+getType()+"\nSpelling = "+getSpelling()+"\nCurrent Line = "+getCurrentLine()+"\nCurrent Column = "+getCurrentColumn());
+		return new String("Type = "+getType()+
+				"\nSpelling = "+getSpelling()+
+				"\nCurrent Line = "+getCurrentLine()+
+				"\nCurrent Column = "+getCurrentColumn()
+				);
 	}
 	
 	public final static int
-	
-		IF				= 0,
-		THEN			= 1,
-		ELSE			= 2,
-		WHILE			= 3,
-		DO				= 4,
-		BEGIN			= 5,
-		END				= 6,
-		LET				= 7,
-		IN				= 8,
-		VAR				= 9,
-		CONST			= 10,
-		IDENTIFIER		= 11,
-		INTLITERAL		= 12,
-		BECOMES			= 13,	// :=
-		OPERATORSOM		= 14,	// +
-		OPERATORSUB		= 15,	// -
-		OPERATORDIV		= 16,	// /
-		OPERATORMULT	= 17,	// *
-		LEQ				= 18,	// <
-		GEQ				= 19,	// >
-		EQUALS			= 20,	// =
-		LPAREN			= 21,	// (
-		RPAREN			= 22,	// )
-		SEMICOLON		= 23,	// ;
-		IS				= 24,	// ~
-		COLON			= 25;	// :
+		ID				= 0,
+		TRUE			= 1,
+		FALSE			= 2,
+		BEGIN			= 3,
+		END				= 4,
+		IF				= 5,
+		THEN			= 6,
+		ELSE			= 7,
+		FUNCTION		= 8,
+		PROCEDURE		= 9,
+		VAR				= 10,
+		WHILE			= 11,
+		DO				= 12,
+		OR				= 13,	// OR op
+		AND				= 14,	// AND op
+		PROGRAM			= 15,	// program
+		ARRAY			= 16,	// array
+		OF				= 17,	// of
+		INTEGER			= 18,	// integer
+		REAL			= 19,	// real
+		BOOLEAN			= 20,	// boolean
+		DOT				= 21,	// .
+		TILL			= 22,	// ..
+		LBRACKET		= 23,	// [
+		RBRACKET		= 24,	// ]
+		LPARENTHESIS	= 25,	// (
+		RPARENTHESIS	= 26,	// )
+		COMMA			= 27, 	// ,
+		COLON			= 28, 	// : 
+		SEMICOLON		= 29, 	// ;
+		SUMOP			= 30, 	// +
+		SUBOP			= 31, 	// -
+		MULOP			= 32,	// *
+		DIVOP			= 33, 	// /
+		LOTOP			= 34, 	// <
+		HITOP			= 35,	// >
+		LOEOP			= 36, 	// <=
+		HIEOP			= 37, 	// >=
+		EQTOP			= 38, 	// =
+		DIFOP			= 39, 	// <>
+		ATTOP			= 40, 	// :=
+		INTLITERAL		= 41,
+		FLOATLITERAL	= 42;
+		
+		
 	
 	private final static String[] spellings = {
-			
-			"<identifier>",
-			"<interger-literal>",
-			"<operator>",
+			"id",
+			"true",
+			"false",
 			"begin",
-			"const",
-			"do",
-			"else",
 			"end",
 			"if",
-			"in",
-			"let",
 			"then",
+			"else",
+			"function",
+			"procedure",
 			"var",
 			"while",
-			";",
-			":",
-			":=",
-			"~",
+			"do",
+			"or",
+			"and",
+			"program",
+			"array",
+			"of",
+			"integer",
+			"real",
+			"boolean",
+			".",
+			"..",
+			"[",
+			"]",
 			"(",
 			")",
-			"<eot>"
+			",",
+			":",
+			";",
+			"+",
+			"-",
+			"*",
+			"/",
+			"<",
+			">",
+			"<=",
+			">=",
+			"=",
+			"<>",
+			":=",
+			"int-lit",
+			"float-lit"
+			//"<eot>"
 	};
 	
 }

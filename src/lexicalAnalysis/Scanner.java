@@ -11,7 +11,6 @@ public class Scanner {
 	
 	
 	public Scanner(TextFileReader fileText){
-	
 		this.fileText = fileText;
 		setCurrentLine(0);
 		setCurrentColumn(0);
@@ -59,9 +58,9 @@ public class Scanner {
 	}
 	
 	private void take(char expectedChar) {
-		if(currentChar == expectedChar) 
+		if(getCurrentChar() == expectedChar) 
 		{
-			currentSpelling.append(currentChar);
+			currentSpelling.append(getCurrentChar());
 			setCurrentChar(fileText.getNextChar());
 			setCurrentColumn(getCurrentColumn()+1);
 		}
@@ -73,7 +72,7 @@ public class Scanner {
 	}
 	
 	private void take() { 	//	takeIt()
-		currentSpelling.append(currentChar);
+		currentSpelling.append(getCurrentChar());
 		setCurrentChar(fileText.getNextChar());
 		
 		if(getCurrentChar()=='\n' ||getCurrentChar()=='\r' )//quebra de linha
@@ -110,10 +109,10 @@ public class Scanner {
 	}
 	
 	private void scanSeparator () { 	//	Tratamento de comentários
-		switch (currentChar) {
+		switch (getCurrentChar()) {
 			case '!':
 				take();
-				while (isGraphic(currentChar))	// Ignorar caracter gráfico
+				while (isGraphic(getCurrentChar()))	// Ignorar caracter gráfico
 					take();
 			break;
 			case ' ': case '\r': case '\n' :
@@ -123,19 +122,42 @@ public class Scanner {
 	}
 	
 	private int scanToken () {
-		return 0;
+		if (isLetter(getCurrentChar())) {
+			take();
+			while(isLetter(getCurrentChar()) || isDigit(getCurrentChar()))
+				take();
+			return Token.ID;
+		}
+		else if (isDigit(getCurrentChar()) || getCurrentChar() == '.'){
+			if (isDigit(getCurrentChar())) { 
+				take();
+				while(isDigit(getCurrentChar()))
+						take();
+				if (getCurrentChar() == '.') {
+					take();
+					while(isDigit(getCurrentChar()))
+							take();
+					return Token.FLOATLITERAL;
+				}
+				else 
+					return Token.INTLITERAL;
+				
+			}
+			while(isLetter(getCurrentChar()) || isDigit(getCurrentChar()))
+		}
+		return -1;
 	}
 	
 	public Token scan () 
 	{
-		if(isEOF(currentChar))
+		if(isEOF(getCurrentChar()))
 			return null;
 		else
 		{
-			while(	currentChar == '!' 
-					|| currentChar == ' '
-					|| currentChar == '\r'
-					|| currentChar == '\n')
+			while(	getCurrentChar() == '!' 
+					|| getCurrentChar() == ' '
+					|| getCurrentChar() == '\r'
+					|| getCurrentChar() == '\n')
 				scanSeparator();
 			
 			currentSpelling = new StringBuffer(" ");

@@ -31,6 +31,21 @@ public class TextFileReader {
 		try
 		{
 			current = (char) text.read();
+			text.mark(2);
+		}
+		catch (Exception E)
+		{
+			System.out.println("Error on character read from file");
+			
+		}
+		return current;
+	}
+	public char lookahead()
+	{
+		char current = (char) -1;
+		try
+		{
+			current = (char) text.read();
 		}
 		catch (Exception E)
 		{
