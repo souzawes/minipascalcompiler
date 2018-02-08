@@ -36,9 +36,12 @@ public class Scanner {
 	public char getCurrentChar() {
 		return currentChar;
 	}
-
 	public void setCurrentChar(char currentChar) {
 		this.currentChar = currentChar;
+	}
+	
+	public char getLookahead(){
+		return fileText.lookahead();
 	}
 
 	public int getCurrentType() {
@@ -128,22 +131,37 @@ public class Scanner {
 				take();
 			return Token.ID;
 		}
-		else if (isDigit(getCurrentChar()) || getCurrentChar() == '.'){
-			if (isDigit(getCurrentChar())) { 
+		else if (isDigit(getCurrentChar())){
+			take();
+			while(isDigit(getCurrentChar()))
+					take();
+			if (getCurrentChar() == '.' && getLookahead() != '.') {
 				take();
 				while(isDigit(getCurrentChar()))
 						take();
-				if (getCurrentChar() == '.') {
-					take();
-					while(isDigit(getCurrentChar()))
-							take();
-					return Token.FLOATLITERAL;
-				}
-				else 
-					return Token.INTLITERAL;
-				
+				return Token.FLOATLITERAL;
 			}
-			while(isLetter(getCurrentChar()) || isDigit(getCurrentChar()))
+			else 
+				return Token.INTLITERAL;	
+		}
+		else if (getCurrentChar() == '.') { 
+			if (getLookahead() == '.'){
+				take();
+				take();
+				return Token.TILL;
+			} 
+			else if (isDigit(getLookahead())){
+				do { 
+					take();
+				}
+				while (isDigit(getCurrentChar()));
+				return Token.FLOATLITERAL;
+			}
+			else {
+				take();
+				return Token.DOT;
+			}
+				
 		}
 		return -1;
 	}

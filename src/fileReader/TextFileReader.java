@@ -35,8 +35,7 @@ public class TextFileReader {
 		}
 		catch (Exception E)
 		{
-			System.out.println("Error on character read from file");
-			
+			System.out.println("Error on character read from file");			
 		}
 		return current;
 	}
@@ -46,11 +45,11 @@ public class TextFileReader {
 		try
 		{
 			current = (char) text.read();
+			text.reset();
 		}
 		catch (Exception E)
 		{
 			System.out.println("Error on character read from file");
-			
 		}
 		return current;
 	}
