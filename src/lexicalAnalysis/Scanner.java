@@ -11,9 +11,11 @@ public class Scanner {
 		
 	public Scanner(TextFileReader fileText){
 		this.fileText = fileText;
+		setCurrentChar(fileText.getNextChar());
+		setCurrentType(0);
+		setCurrentSpelling(new StringBuffer(""));
 		setCurrentLine(1);
 		setCurrentColumn(1);
-		setCurrentChar(fileText.getNextChar());
 	}
 	
 	public void setCurrentLine(int currentLine) 
@@ -77,7 +79,7 @@ public class Scanner {
 		currentSpelling.append(getCurrentChar());
 		setCurrentChar(fileText.getNextChar());
 		
-		if(getCurrentChar()=='\n')//quebra de linha
+		if(getCurrentChar()=='\n')	//quebra de linha
 		{
 			setCurrentLine(getCurrentLine()+1);
 			setCurrentColumn(1);
@@ -93,7 +95,7 @@ public class Scanner {
 			return false;
 	}
 	
-	private boolean isLetter (char c) {
+	private boolean isLetter (char c) {  // Verifica se é uma letra válida
 		if ((c >= 'a' && c <'z') || (c >= 'A' && c <'Z'))
 			return true;
 		else
@@ -119,6 +121,7 @@ public class Scanner {
 			break;
 			case ' ': case '\t': case '\r': case '\n' :
 				take();
+			default:
 			break;
 		}
 	}
@@ -231,7 +234,16 @@ public class Scanner {
 			take();
 			return Token.EQTOP;
 		}
-		return -1; 	//	Tem que ser reportado erro léxico
+		else { 	// 	Erro no análise léxica, 
+				// 	Não foi possível classificar como token da linguagem
+			System.out.println("ERROR\n The character read: " + getCurrentChar() 
+					+ " in line " + getCurrentLine() + 
+					" column "+ getCurrentColumn() + 
+					" cannot be used in Mini-pascal.");
+			take();
+			return -1; 	//	Tem que ser reportado erro léxico
+		}
+		
 	}
 	
 	public Token scan () 
@@ -247,10 +259,14 @@ public class Scanner {
 					|| getCurrentChar() == '\t')
 				scanSeparator();
 			
-			currentSpelling = new StringBuffer(" ");
-			currentType = scanToken(); 
+			setCurrentSpelling(new StringBuffer(""));
+			setCurrentType(scanToken()); 
 						
-			return new Token(currentType, currentSpelling.toString(), getCurrentLine(), getCurrentColumn()-currentSpelling.length()+1);
+			return new Token(getCurrentType(), 
+					currentSpelling.toString(), 
+					getCurrentLine(), 
+					getCurrentColumn()-currentSpelling.length()+1
+					);
 		}	
 	}		
 }

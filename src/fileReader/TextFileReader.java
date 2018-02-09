@@ -45,8 +45,7 @@ public class TextFileReader {
 		try
 		{
 			current = (char) text.read();
-			System.out.println("CURRENT--->" + current + "<---");
-			text.reset();
+			text.reset(); 
 		}
 		catch (Exception E)
 		{

@@ -8,7 +8,6 @@ public class MpC
 	public static void main(String[] args) 
 	{
 		String text = new String();
-		
 		if(args[0].equals("-help"))
 		{
 			

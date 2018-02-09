@@ -14,14 +14,10 @@ public class Parser {
 	}
 	public void parse()
 	{
-		for (int c = 0; c < 40 ; c++)
-		{
-			currentToken = scanner.scan();
+		currentToken = scanner.scan();
+		while(currentToken != null) {
 			System.out.println(currentToken.toString());
 			currentToken = scanner.scan();
-			System.out.println(currentToken.toString());
-			currentToken = scanner.scan();
-			System.out.println(currentToken.toString());
 		}
 	}
 }
