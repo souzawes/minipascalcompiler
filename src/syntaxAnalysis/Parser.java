@@ -20,4 +20,14 @@ public class Parser {
 			currentToken = scanner.scan();
 		}
 	}
+	public void accept(int expectedType) {
+		if (currentToken.getType() == expectedType)
+			currentToken = scanner.scan();
+		else {
+			// Escrever mensagem de erro sintático
+		}
+	}
+	public void accept() {	//	acceptIt();
+			currentToken = scanner.scan();
+	}
 }
