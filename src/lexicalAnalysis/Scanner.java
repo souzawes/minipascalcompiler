@@ -11,8 +11,8 @@ public class Scanner {
 		
 	public Scanner(TextFileReader fileText){
 		this.fileText = fileText;
-		setCurrentLine(0);
-		setCurrentColumn(0);
+		setCurrentLine(1);
+		setCurrentColumn(1);
 		setCurrentChar(fileText.getNextChar());
 	}
 	
@@ -77,17 +77,17 @@ public class Scanner {
 		currentSpelling.append(getCurrentChar());
 		setCurrentChar(fileText.getNextChar());
 		
-		if(getCurrentChar()=='\n' ||getCurrentChar()=='\r' )//quebra de linha
+		if(getCurrentChar()=='\n')//quebra de linha
 		{
 			setCurrentLine(getCurrentLine()+1);
-			setCurrentColumn(0);
+			setCurrentColumn(1);
 		}
 		else
 			setCurrentColumn(getCurrentColumn()+1);
 	}
 	
 	private boolean isDigit (char c) {	//	Verifica se é um digito
-		if ((c >= '0' && c <'9'))
+		if ((c >= '0' && c <= '9'))
 			return true;
 		else
 			return false;
@@ -117,7 +117,7 @@ public class Scanner {
 				while (isGraphic(getCurrentChar()))	// Ignorar caracter gráfico
 					take();
 			break;
-			case ' ': case '\r': case '\n' :
+			case ' ': case '\t': case '\r': case '\n' :
 				take();
 			break;
 		}
@@ -144,22 +144,18 @@ public class Scanner {
 				return Token.INTLITERAL;	
 		}
 		else if (getCurrentChar() == '.') { 
-			if (getLookahead() == '.'){
-				take();
+			take();
+			if (getCurrentChar() == '.'){
 				take();
 				return Token.TILL;	
 			} 
-			else if (isDigit(getLookahead())){
-				do { 
+			else if (isDigit(getCurrentChar())){
+				while (isDigit(getCurrentChar()))
 					take();
-				}
-				while (isDigit(getCurrentChar()));
 				return Token.FLOATLITERAL;
 			}
-			else {
-				take();
-				return Token.DOT;
-			}				
+			else 
+				return Token.DOT;		
 		}
 		else if (getCurrentChar() == '[') {
 			take();
@@ -247,13 +243,14 @@ public class Scanner {
 			while(	getCurrentChar() == '!' 
 					|| getCurrentChar() == ' '
 					|| getCurrentChar() == '\r'
-					|| getCurrentChar() == '\n')
+					|| getCurrentChar() == '\n'
+					|| getCurrentChar() == '\t')
 				scanSeparator();
 			
 			currentSpelling = new StringBuffer(" ");
 			currentType = scanToken(); 
 						
-			return new Token(currentType, currentSpelling.toString(), getCurrentLine(), getCurrentColumn()-currentSpelling.length());
+			return new Token(currentType, currentSpelling.toString(), getCurrentLine(), getCurrentColumn()-currentSpelling.length()+1);
 		}	
 	}		
 }
