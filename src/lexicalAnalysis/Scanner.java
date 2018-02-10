@@ -119,7 +119,7 @@ public class Scanner {
 				while (isGraphic(getCurrentChar()))	// Ignorar caracter gráfico
 					take();
 			break;
-			case ' ': case '\t': case '\r': case '\n' :
+			case ' ': case '﻿': case '\t': case '\r': case '\n' :
 				take();
 			default:
 			break;
@@ -248,6 +248,10 @@ public class Scanner {
 	
 	public Token scan () 
 	{
+		//char character = '﻿';  
+		//int ascii = (int) character;
+		
+		//System.out.println("ASCII: " + ascii);
 		if(isEOF(getCurrentChar()))
 			return null;
 		else
@@ -258,6 +262,10 @@ public class Scanner {
 					|| getCurrentChar() == '\n'
 					|| getCurrentChar() == '\t')
 				scanSeparator();
+			  
+			
+			//if(isEOF(getCurrentChar()))
+			//	return null;
 			
 			setCurrentSpelling(new StringBuffer(""));
 			setCurrentType(scanToken()); 
