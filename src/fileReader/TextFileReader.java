@@ -22,7 +22,7 @@ public class TextFileReader {
 		}
 		catch(Exception E)
 		{
-			System.out.println("Error at setting initial mark");;
+			System.out.println("Error at setting initial mark");
 		}
 	}
 	public char getNextChar()

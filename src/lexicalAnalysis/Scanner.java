@@ -15,7 +15,7 @@ public class Scanner {
 		setCurrentType(0);
 		setCurrentSpelling(new StringBuffer(""));
 		setCurrentLine(1);
-		setCurrentColumn(1);
+		setCurrentColumn(2);	//	Começa na coluna 2 porque já foi feita a leitura de um caracter
 	}
 	
 	public void setCurrentLine(int currentLine) 
@@ -236,8 +236,8 @@ public class Scanner {
 		}
 		else { 	// 	Erro no análise léxica, 
 				// 	Não foi possível classificar como token da linguagem
-			System.out.println("ERROR\n The character read: " + getCurrentChar() 
-					+ " in line " + getCurrentLine() + 
+			System.out.println("ERROR\n The character read: [" + getCurrentChar() 
+					+ "] (character code " + (int) getCurrentChar() + "), in line " + getCurrentLine() + 
 					" column "+ getCurrentColumn() + 
 					" cannot be used in Mini-pascal.");
 			take();
@@ -252,6 +252,7 @@ public class Scanner {
 		//int ascii = (int) character;
 		
 		//System.out.println("ASCII: " + ascii);
+		//System.out.println(isEOF(getCurrentChar()));
 		if(isEOF(getCurrentChar()))
 			return null;
 		else
@@ -263,18 +264,18 @@ public class Scanner {
 					|| getCurrentChar() == '\t')
 				scanSeparator();
 			  
-			
-			//if(isEOF(getCurrentChar()))
-			//	return null;
-			
-			setCurrentSpelling(new StringBuffer(""));
-			setCurrentType(scanToken()); 
-						
-			return new Token(getCurrentType(), 
-					currentSpelling.toString(), 
-					getCurrentLine(), 
-					getCurrentColumn()-currentSpelling.length()+1
-					);
+			if(isEOF(getCurrentChar()))
+				return null;
+			else {
+				setCurrentSpelling(new StringBuffer(""));
+				setCurrentType(scanToken()); 
+							
+				return new Token(getCurrentType(), 
+						currentSpelling.toString(), 
+						getCurrentLine(), 
+						getCurrentColumn()-currentSpelling.length()-1
+						);
+			}
 		}	
 	}		
 }

@@ -96,7 +96,7 @@ public class Token{
 		EQTOP			= 38, 	// =
 		DIFOP			= 39, 	// <>
 		ATTOP			= 40, 	// :=
-		INTLITERAL		= 41,
+		INTLITERAL		= 41,	// 
 		FLOATLITERAL	= 42;
 		
 		
