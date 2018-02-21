@@ -131,11 +131,6 @@ public class Parser {
 			accept();								//	aos "ifs" mais internos
 			parseComando();
 		}
-		else if (currentToken.getType() == Token.SEMICOLON)
-			parseVazio();
-		else {
-			// Escrever mensagem de erro sintático
-		}
 	}
 	private void parseCorpo() {	//	<corpo> ::=
 								//		<declarações> <comando-composto>
