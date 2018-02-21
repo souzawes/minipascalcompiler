@@ -15,10 +15,7 @@ public class Parser {
 	public void parse()
 	{
 		currentToken = scanner.scan();
-		while(currentToken != null) {
-			System.out.println(currentToken.toString());
-			currentToken = scanner.scan();
-		}
+		parsePrograma();
 	}
 	public void accept(int expectedType) {
 		if (currentToken.getType() == expectedType)
