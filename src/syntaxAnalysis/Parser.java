@@ -23,8 +23,14 @@ public class Parser {
 	public void accept(int expectedType) {
 		if (currentToken.getType() == expectedType)
 			currentToken = scanner.scan();
-		else {
-			// Escrever mensagem de erro sintático
+		else {	//	Erro na análise sintática
+				//	Não foi possível achar regra de derivação - token inesperado
+			System.out.println("ERROR - SYNTAX\nUnexpected token read: [" + currentToken.getSpelling() +
+					"] (token type " + currentToken.getType() + "), in line " + currentToken.getLine() + 
+					" column "+ currentToken.getColumn() + 
+					", while it was expected a \"" + Token.spellings[expectedType] + 
+					"\" (token type " + expectedType + ")." 
+					);
 		}
 	}
 	public void accept() {	//	acceptIt();

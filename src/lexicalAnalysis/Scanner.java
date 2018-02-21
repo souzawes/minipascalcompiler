@@ -131,7 +131,50 @@ public class Scanner {
 			take();							//	{a,b,...,z,A,B,...,Z}
 			while(isLetter(getCurrentChar()) || isDigit(getCurrentChar()))
 				take();
-			return Token.ID;
+			switch (getCurrentSpelling().toString()) {	
+				case "true":
+					return Token.TRUE;
+				case "false":
+					return Token.FALSE;
+				case "begin":
+					return Token.BEGIN;
+				case "end":
+					return Token.END;
+				case "if":
+					return Token.IF;
+				case "then":
+					return Token.THEN;
+				case "else":
+					return Token.ELSE;
+				case "function":
+					return Token.FUNCTION;
+				case "procedure":
+					return Token.PROCEDURE;
+				case "var":
+					return Token.VAR;
+				case "while":
+					return Token.WHILE;
+				case "do":
+					return Token.DO;
+				case "or":
+					return Token.OR;
+				case "and":
+					return Token.AND;
+				case "program":
+					return Token.PROGRAM;
+				case "array":
+					return Token.ARRAY;
+				case "of":
+					return Token.OF;
+				case "integer":
+					return Token.INTEGER;
+				case "real":
+					return Token.REAL;
+				case "boolean":
+					return Token.BOOLEAN;
+				default:
+					return Token.ID;
+			}
 		}
 		else if (isDigit(getCurrentChar())){	//	Identifica o conjunto de digitos
 			take();								//	{0,1,...,9}
@@ -236,10 +279,11 @@ public class Scanner {
 		}
 		else { 	// 	Erro no análise léxica, 
 				// 	Não foi possível classificar como token da linguagem
-			System.out.println("ERROR\n The character read: [" + getCurrentChar() 
+			System.out.println("ERROR - LEXICAL\nThe character read: [" + getCurrentChar() 
 					+ "] (character code " + (int) getCurrentChar() + "), in line " + getCurrentLine() + 
-					" column "+ getCurrentColumn() + 
-					" cannot be used in Mini-pascal.");
+					" column "+ (getCurrentColumn()-currentSpelling.length()-1) + 
+					" cannot be used in Mini-pascal."
+					);
 			take();
 			return -1; 	//	Tem que ser reportado erro léxico
 		}
@@ -255,13 +299,13 @@ public class Scanner {
 		//System.out.println(isEOF(getCurrentChar()));
 		if(isEOF(getCurrentChar()))
 			return null;
-		else
-		{
+		else {
 			while(	getCurrentChar() == '!' 
 					|| getCurrentChar() == ' '
 					|| getCurrentChar() == '\r'
 					|| getCurrentChar() == '\n'
-					|| getCurrentChar() == '\t')
+					|| getCurrentChar() == '\t'
+					)
 				scanSeparator();
 			  
 			if(isEOF(getCurrentChar()))
@@ -270,7 +314,7 @@ public class Scanner {
 				setCurrentSpelling(new StringBuffer(""));
 				setCurrentType(scanToken()); 
 							
-				return new Token(getCurrentType(), 
+				return new Token(	getCurrentType(), 
 						currentSpelling.toString(), 
 						getCurrentLine(), 
 						getCurrentColumn()-currentSpelling.length()-1

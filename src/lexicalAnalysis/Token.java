@@ -99,9 +99,8 @@ public class Token{
 		INTLITERAL		= 41,	// 
 		FLOATLITERAL	= 42;
 		
-		
 	
-	private final static String[] spellings = {
+	public final static String[] spellings = {
 			"id",
 			"true",
 			"false",
