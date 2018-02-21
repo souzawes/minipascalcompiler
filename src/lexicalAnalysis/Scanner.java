@@ -184,7 +184,7 @@ public class Scanner {
 			take();
 			if (getCurrentChar() == '=') {
 				take();
-				return Token.ATTOP;
+				return Token.OPATTRIB;
 			}
 			return Token.COLON;
 		}
@@ -194,45 +194,45 @@ public class Scanner {
 		}
 		else if (getCurrentChar() == '+') {
 			take();
-			return Token.SUMOP;
+			return Token.OPSUM;
 		}
 		else if (getCurrentChar() == '-') {
 			take();
-			return Token.SUBOP;
+			return Token.OPSUB;
 		}
 		else if (getCurrentChar() == '*') {
 			take();
-			return Token.MULOP;
+			return Token.OPMULT;
 		}
 		else if (getCurrentChar() == '/') {
 			take();
-			return Token.DIVOP;
+			return Token.OPDIV;
 		}
 		else if (getCurrentChar() == '<') {
 			take();
 			if (getCurrentChar() == '=') {
 				take();
-				return Token.LOEOP;
+				return Token.OPLOWOREQ;
 			}
 			else if (getCurrentChar() == '>') {
 				take();
-				return Token.DIFOP;
+				return Token.OPDIFF;
 			}
 			else 
-				return Token.MULOP;
+				return Token.OPLOWERTHN;
 		}
 		else if (getCurrentChar() == '>') {
 			take();
 			if (getCurrentChar() == '=') {
 				take();
-				return Token.GREOP;
+				return Token.OPGREOREQ;
 			}
 			else 
-				return Token.GRTOP;
+				return Token.OPGREATTHN;
 		}
 		else if (getCurrentChar() == '=') {
 			take();
-			return Token.EQTOP;
+			return Token.OPEQUAL;
 		}
 		else { 	// 	Erro no análise léxica, 
 				// 	Não foi possível classificar como token da linguagem

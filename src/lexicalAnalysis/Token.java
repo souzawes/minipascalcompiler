@@ -85,17 +85,17 @@ public class Token{
 		COMMA			= 27, 	// ,
 		COLON			= 28, 	// : 
 		SEMICOLON		= 29, 	// ;
-		SUMOP			= 30, 	// +
-		SUBOP			= 31, 	// -
-		MULOP			= 32,	// *
-		DIVOP			= 33, 	// /
-		LOTOP			= 34, 	// <
-		GRTOP			= 35,	// >
-		LOEOP			= 36, 	// <=
-		GREOP			= 37, 	// >=
-		EQTOP			= 38, 	// =
-		DIFOP			= 39, 	// <>
-		ATTOP			= 40, 	// :=
+		OPSUM			= 30, 	// +
+		OPSUB			= 31, 	// -
+		OPMULT			= 32,	// *
+		OPDIV			= 33, 	// /
+		OPLOWERTHN		= 34, 	// <
+		OPGREATTHN		= 35,	// >
+		OPLOWOREQ		= 36, 	// <=
+		OPGREOREQ		= 37, 	// >=
+		OPEQUAL			= 38, 	// =
+		OPDIFF			= 39, 	// <>
+		OPATTRIB		= 40, 	// :=
 		INTLITERAL		= 41,	// 
 		FLOATLITERAL	= 42;
 		
