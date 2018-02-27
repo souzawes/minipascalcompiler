@@ -4,7 +4,9 @@
  * These classes are responsible for file reading.
  *
  *
- * @author Ricardo, Ruan & Wesley
+ * @author Ricardo
+ * @author Ruan
+ * @author Wesley
  *
  */
 package frontEnd.fileReader;

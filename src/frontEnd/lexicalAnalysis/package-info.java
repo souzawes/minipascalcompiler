@@ -4,7 +4,9 @@
  * These classes are responsible for the Lexical Analysis of Mini-Pascal.
  *
  *
- * @author Ricardo, Ruan & Wesley
+ * @author Ricardo
+ * @author Ruan
+ * @author Wesley
  *
  */
 package frontEnd.lexicalAnalysis;
