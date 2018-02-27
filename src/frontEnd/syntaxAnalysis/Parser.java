@@ -1,7 +1,7 @@
-package syntaxAnalysis;
-import fileReader.TextFileReader;
-import lexicalAnalysis.Scanner;
-import lexicalAnalysis.Token;
+package frontEnd.syntaxAnalysis;
+import frontEnd.fileReader.TextFileReader;
+import frontEnd.lexicalAnalysis.Scanner;
+import frontEnd.lexicalAnalysis.Token;
 
 public class Parser {
 

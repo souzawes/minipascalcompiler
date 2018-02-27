@@ -1,7 +1,7 @@
-import fileReader.TextFileReader;
-import lexicalAnalysis.Scanner;
-import lexicalAnalysis.Token;
-import syntaxAnalysis.Parser;
+import frontEnd.fileReader.TextFileReader;
+import frontEnd.lexicalAnalysis.Scanner;
+import frontEnd.lexicalAnalysis.Token;
+import frontEnd.syntaxAnalysis.Parser;
 public class MpC 
 {
 

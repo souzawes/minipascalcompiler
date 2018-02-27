@@ -1,5 +1,5 @@
-package lexicalAnalysis;
-import fileReader.TextFileReader;
+package frontEnd.lexicalAnalysis;
+import frontEnd.fileReader.TextFileReader;
 
 public class Scanner {
 	

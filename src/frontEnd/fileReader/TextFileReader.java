@@ -1,4 +1,4 @@
-package fileReader;
+package frontEnd.fileReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 

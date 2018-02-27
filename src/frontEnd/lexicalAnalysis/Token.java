@@ -1,4 +1,4 @@
-package lexicalAnalysis;
+package frontEnd.lexicalAnalysis;
 
 public class Token{
 	
